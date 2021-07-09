@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: tarabut
+spec:
+  type: NodePort
+  selector:
+    app: python-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 5000

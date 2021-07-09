@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: python-app-deployment
+  namespace: tarabut
+  labels:
+    app: python-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: faraaz/tarabut:test
+        ports:
+        - containerPort: 5000
+
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+
+        env:
+        - name: NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-name
+              key: NAME
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: PASSWORD
+
+        livenessProbe:
+          exec:
+            command:
+              - cat
+              - /app/requirements.txt
+          initialDelaySeconds: 3
+          periodSeconds: 5
+
+        readinessProbe:
+          httpGet:
+            path: /name
+            port: 5000
+          initialDelaySeconds: 3
+          periodSeconds: 5
+
+        

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: tarabut
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /name
+spec:
+  rules:
+    - host: tarabut.example.com
+      http:
+        paths:
+          - pathType: Exact
+            path: /name
+            backend:
+              service:
+                name: app-service
+                port:
+                  number: 8080
