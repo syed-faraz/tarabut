@@ -20,4 +20,4 @@ jobs:
         context: .
         file: Dockerfile
         push: true
-        tags: faraaz/tarabut:testing
+        tags: faraaz/tarabut:v1.0.0
