@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: faraaz/tarabut:test
+        image: tarabut:test
         ports:
         - containerPort: 5000
 
