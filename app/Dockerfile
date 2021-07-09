@@ -5,6 +5,6 @@ WORKDIR /app
 COPY ./app/requirements.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY ./app .
+COPY ./app/app.py .
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
