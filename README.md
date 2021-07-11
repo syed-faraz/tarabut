@@ -101,5 +101,3 @@ As you can see below, you can only list the pods in any namespace (cluster wide)
 The below screenshot shows the Github Actions workflow which checks-out the repository, builds the Docker Image from the Dockerfile and pushes it to the Dockerhub Repository. 
 
 <img width="1414" alt="Screen Shot 2021-07-11 at 8 28 23 AM" src="https://user-images.githubusercontent.com/45511087/125181659-aa5f3b80-e224-11eb-931f-e4d210bb6778.png">
-
- 
