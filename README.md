@@ -1,12 +1,55 @@
-# tarabut
+# Tarabut
 
-I have created the application with the API, using Python and Flask.
-The deployment is through Kubernetes manifest files. 
-The build of Docker Image is automated through Github Action which gets triggered for every push. 
+Application 
 
-If building the Docker image locally, install the pre-requisites 
-python
-pip
+I have created the application with the API endpoint, using Python and Flask.
+•	The application has been containerized using Docker.
+•	The build and push of Docker Image is automated through Github Action which gets triggered for every git push. 
+•	The deployment is done on Kubernetes cluster using the Kubernetes manifest files. 
+
+The Docker Image has been prebuilt and made available for deployment on the public Dockerhub repository,
+ 
+docker pull faraaz/tarabut:v1.0.0
+
+To deploy the application on a Kubernetes cluster, you can clone the repository and run the below commands,
+
+NOTE: Please create a namespace with the name, ‘tarabut’, for the deployment to be successful.
+
+1.	kubectl create ns tarabut 
+2.	kubectl apply -f kubernetes/
+
+Where Kubernetes is the name of the folder containing all the manifest files.
+
+At this stage, the deployment should be successful and the application pod should be running as seen in the below screenshot.
+
+ 
+
+
+The application has an API with the endpoint {BASE URL}/name exposed. 
+The endpoint returns current date and time in the UAE timezone (Have used pytz to set the timezone to UAE) with values of the NAME and PASSWORD variables. 
+
+•	The variable "NAME" takes its value from the Kubernetes Configmap
+•	The variable "PASSWORD" takes its value from the Kubernetes Secret
+
+Below is a screenshot of the API’s GET request and response in postman
+
+ 
+
+Ingress:
+
+I have setup nginx-controller and created the ingress resource using a test domain. 
+
+ 
+
+If deploying locally, please set the test URL against localhost (127.0.0.1) inside your hosts file as shown below,
+In this case, tarabut.example.com
+
+ 
+
+In production environment, make sure to allow the access over the network with SSL certificates in place and set the DNS records for the application to be accessible over the internet.  
+
+If deploying on a cloud platform, the service type can be set to 'loadbalancer' which will provision a load balancer with an external DNS record for access from the outside world. 
+
 
 Other pre-requsities:
 Docker
@@ -23,24 +66,8 @@ docker build -t <tag> .
 
 Deploy all the Kubernetes manifests using the below command,
 
-kubectl
+kubectl 
 
-The application has an API with the endpoint {BASE URL}/name exposed. 
-The endpoint returns current date and time in the UAE timezone with values of the NAME and PASSWORD variables. 
-
-The variable "NAME" takes its value from the Configmap at the time of deployment from the Kubernetes manifest
-The variable "PASSWORD" takes its value from the secret at the time of deployment from the Kubernetes manifest
-
-Have used pytz to set the timezone to UAE
-
-
-If deploying locally, please set the test URL against localhost (127.0.0.1) inside your hosts file as shown below,
-For example, tarabut.example.com/name
-
-If deploying on cloud, the service type can be set to 'loadbalancer' which will provision a load balancer for access from the outside world. 
-
-The application has been containerized using Dockerfile. 
-The Docker image gets built and pushed by the Github Action which gets triggered for every push to the main branch.
 
 Liveness and Readiness probes have been configured to perform health checks on the pod. 
 
@@ -62,6 +89,13 @@ $ kubectl config use-context list-pods
 
 Then run the below commands to check the permissions as seen in the screenshot below,
 
+ 
+
 As you can see below, you can only list the pods in any namespace (cluster wide) but cannot do anything else. 
+ 
 
 
+CICD:
+
+
+ 
