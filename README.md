@@ -23,7 +23,7 @@ docker build -t <tag> .
 
 Deploy all the Kubernetes manifests using the below command,
 
-kubectl 
+kubectl
 
 The application has an API with the endpoint {BASE URL}/name exposed. 
 The endpoint returns current date and time in the UAE timezone with values of the NAME and PASSWORD variables. 
