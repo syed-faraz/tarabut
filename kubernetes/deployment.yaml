@@ -15,9 +15,15 @@ spec:
       labels:
         app: python-app
     spec:
+      securityContext:
+          runAsUser: 1000
+          runAsGroup: 3000
+          fsGroup: 2000
+       
       containers:
       - name: python-app
         image: faraaz/tarabut:v1.0.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
 
@@ -56,4 +62,5 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 5
 
+      serviceAccountName: list-pods-sa
         
