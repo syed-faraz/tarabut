@@ -23,10 +23,10 @@ jobs:
           push: true
           tags: faraaz/tarabut:v1.0.0
           
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#       - name: Slack Notification
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           
       - name: Wait for pods
         uses: CodingNagger/minikube-wait-action@v1.0.1
