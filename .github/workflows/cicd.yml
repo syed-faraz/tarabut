@@ -32,4 +32,4 @@ jobs:
         uses: CodingNagger/minikube-wait-action@v1.0.1
       - name: Check pods
         run: |
-          kubectl get pods
+          kubectl get pods -n tarabut
