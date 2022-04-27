@@ -27,3 +27,9 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          
+      - name: Wait for pods
+        uses: CodingNagger/minikube-wait-action@v1.0.1
+      - name: Check pods
+        run: |
+          kubectl get pods
