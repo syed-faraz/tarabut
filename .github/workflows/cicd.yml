@@ -34,6 +34,8 @@ jobs:
           manifests: |
               kubernetes/
           kubectl-version: 'latest'
+        env:
+          KUBECONFIG: ${{secrets.KUBECONFIG}}
           
       - name: Wait for pods
         uses: CodingNagger/minikube-wait-action@v1.0.1
