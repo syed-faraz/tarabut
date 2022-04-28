@@ -32,7 +32,7 @@ jobs:
         with:
           namespace: 'tarabut'
           manifests: |
-              kubernetes/
+              kubernetes/deployment.yaml
           kubectl-version: 'latest'
         env:
           KUBECONFIG: ${{secrets.KUBECONFIG}}
