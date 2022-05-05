@@ -46,7 +46,7 @@ jobs:
       - name: verify deployment
         uses: steebchen/kubectl@master
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
           KUBECTL_VERSION: "1.15"
         with:
           args: '"kubectl rollout status deployment/python-app-deployment -n tarabut"'
