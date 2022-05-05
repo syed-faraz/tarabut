@@ -51,7 +51,14 @@ jobs:
       #   with:
       #     args: '"kubectl rollout status deployment/python-app-deployment -n tarabut"'
 
-      - uses: tale/kubectl-action@v1
+      # - uses: tale/kubectl-action@v1
+      #   with:
+      #     base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+      # - run: kubectl rollout status deployment/python-app-deployment -n tarabut
+
+      - name: verify deployment
+        uses: steebchen/kubectl@v2.0.0
         with:
-          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
-      - run: kubectl rollout status deployment/python-app-deployment -n tarabut
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          version: v1.21.0 # specify kubectl binary version explicitly
+          command: rollout status deployment/python-app-deployment -n tarabut
