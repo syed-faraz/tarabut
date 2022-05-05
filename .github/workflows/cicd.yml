@@ -43,10 +43,15 @@ jobs:
       #   run: |
       #     kubectl get pods -n tarabut
 
-      - name: verify deployment
-        uses: steebchen/kubectl@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          KUBECTL_VERSION: "1.15"
+      # - name: verify deployment
+      #   uses: steebchen/kubectl@master
+      #   env:
+      #     KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      #     KUBECTL_VERSION: "1.15"
+      #   with:
+      #     args: '"kubectl rollout status deployment/python-app-deployment -n tarabut"'
+
+      - uses: tale/kubectl-action@v1
         with:
-          args: '"kubectl rollout status deployment/python-app-deployment -n tarabut"'
+          base64-kube-config: ${{ secrets.KUBE_CONFIG }}
+      - run: kubectl rollout status deployment/python-app-deployment -n tarabut
