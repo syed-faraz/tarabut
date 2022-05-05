@@ -49,4 +49,4 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
           KUBECTL_VERSION: "1.15"
         with:
-          args: '"rollout status deployment/python-app-deployment"'
+          args: '"kubectl rollout status deployment/python-app-deployment -n tarabut"'
