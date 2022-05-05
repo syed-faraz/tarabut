@@ -28,17 +28,25 @@ jobs:
 #         env:
 #           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-      - uses: jtalk/k8s-deploy@v2
-        with:
-          namespace: 'tarabut'
-          manifests: |
-              kubernetes/deployment.yaml
-          kubectl-version: 'latest'
-        env:
-          KUBECONFIG: ${{secrets.KUBECONFIG}}
+      # - uses: jtalk/k8s-deploy@v2
+      #   with:
+      #     namespace: 'tarabut'
+      #     manifests: |
+      #         kubernetes/deployment.yaml
+      #     kubectl-version: 'latest'
+      #   env:
+      #     KUBECONFIG: ${{secrets.KUBECONFIG}}
           
-      - name: Wait for pods
-        uses: CodingNagger/minikube-wait-action@v1.0.1
-      - name: Check pods
-        run: |
-          kubectl get pods -n tarabut
+      # - name: Wait for pods
+      #   uses: CodingNagger/minikube-wait-action@v1.0.1
+      # - name: Check pods
+      #   run: |
+      #     kubectl get pods -n tarabut
+
+      - name: verify deployment
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          KUBECTL_VERSION: "1.15"
+        with:
+          args: '"rollout status deployment/python-app-deployment"'
