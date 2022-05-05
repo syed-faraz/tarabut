@@ -37,11 +37,11 @@ jobs:
       #   env:
       #     KUBECONFIG: ${{secrets.KUBECONFIG}}
           
-      - name: Wait for pods
-        uses: CodingNagger/minikube-wait-action@v1.0.1
-      - name: Check pods
-        run: |
-          kubectl get pods -n tarabut
+      # - name: Wait for pods
+      #   uses: CodingNagger/minikube-wait-action@v1.0.1
+      # - name: Check pods
+      #   run: |
+      #     kubectl get pods -n tarabut
 
       - name: verify deployment
         uses: steebchen/kubectl@master
