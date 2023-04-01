@@ -22,11 +22,6 @@ jobs:
           file: Dockerfile
           push: true
           tags: faraaz/tarabut:v1.0.0
-          
-#       - name: Slack Notification
-#         uses: rtCamp/action-slack-notify@v2
-#         env:
-#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
       # - uses: jtalk/k8s-deploy@v2
       #   with:
