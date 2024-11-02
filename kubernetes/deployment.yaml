@@ -22,7 +22,7 @@ spec:
        
       containers:
       - name: python-app
-        image: faraaz/mdx:v1.0.0
+        image: faraaz/tarabut:v1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
