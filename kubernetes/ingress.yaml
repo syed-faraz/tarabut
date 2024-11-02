@@ -2,16 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: app-ingress
-  namespace: tarabut
+  namespace: mdx
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /name
+    nginx.ingress.kubernetes.io/rewrite-target: /upload
 spec:
   rules:
-    - host: tarabut.example.com
+    - host: mdx.com
       http:
         paths:
           - pathType: Exact
-            path: /name
+            path: /upload
             backend:
               service:
                 name: app-service

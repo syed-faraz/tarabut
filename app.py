@@ -1,21 +1,16 @@
+import subprocess
+from subprocess import Popen, PIPE
+from subprocess import check_output
 from flask import Flask
-from flask_restful import Api, Resource
-import datetime
-import pytz
-import os
+
+def get_shell_script_output_using_check_output():
+    stdout = check_output(['./encrypt.sh']).decode('utf-8')
+    return stdout
 
 app = Flask(__name__)
-api = Api(app)
 
-class DateName(Resource):
-    def get(self):
-        now = datetime.datetime.now(pytz.timezone('Asia/Dubai'))
-        date = (now.strftime("%d/%m/%Y %H:%M"))
-        NAME = os.environ['NAME']
-        PASSWORD = os.environ['PASSWORD']
-        return (date + " Hello " + NAME + ", your password is " + PASSWORD) 
+@app.route('/',methods=['GET',])
+def home():
+    return '<pre>'+get_shell_script_output_using_check_output()+'</pre>'
 
-api.add_resource(DateName, "/name")
-
-if __name__ == "__main__":
-    app.run
+app.run(debug=True)

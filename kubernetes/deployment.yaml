@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: python-app-deployment
-  namespace: tarabut
+  namespace: mdx
   labels:
     app: python-app
 spec:
@@ -22,7 +22,7 @@ spec:
        
       containers:
       - name: python-app
-        image: faraaz/tarabut:v1.0.0
+        image: faraaz/mdx:v1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -34,18 +34,6 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
-
-        env:
-        - name: NAME
-          valueFrom:
-            configMapKeyRef:
-              name: app-name
-              key: NAME
-        - name: PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: app-secret
-              key: PASSWORD
 
         livenessProbe:
           exec:
